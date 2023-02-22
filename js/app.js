@@ -55,14 +55,17 @@ color.addEventListener('change', e => {
 
 // Eventos
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarAutos();
+    mostrarAutos( autos );
 
     // Llenas las opciones
     llenarSelect();
 })
 
-// Funciones
-function mostrarAutos() {
+// Funciones Manipulacion DOM
+function mostrarAutos( autos ) {
+
+    limpiarResultadosHTML();
+
     autos.forEach(auto => {
 
         const { marca, modelo, year, puertas, transmision, precio, color } = auto;
@@ -75,6 +78,12 @@ function mostrarAutos() {
     })
 }
 
+function limpiarResultadosHTML() {
+    while (resultado.firstChild) {
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
 function llenarSelect() {
     for(let i = max; i > min; i--){
         const opcion = document.createElement('option');
@@ -84,9 +93,11 @@ function llenarSelect() {
     }
 }
 
+// Funciones de Filtrado
 function filtrarAuto(){
     const resultado = autos.filter( filtrarMarca ).filter( filtrarYear );
-    console.log(resultado);
+    //console.log(resultado);
+    mostrarAutos(resultado);
 }
 
 function filtrarMarca( auto ) {
