@@ -24,6 +24,7 @@ const datosBusqueda = {
 // Listeners de Busqueda
 marca.addEventListener('change', e => {
     datosBusqueda.marca = e.target.value;
+    filtrarAuto();
 })
 
 year.addEventListener('change', e => {
@@ -48,7 +49,6 @@ transmision.addEventListener('change', e => {
 
 color.addEventListener('change', e => {
     datosBusqueda.color = e.target.value;
-    console.log(datosBusqueda);
 })
 
 
@@ -81,4 +81,17 @@ function llenarSelect() {
         opcion.textContent = i;
         year.appendChild(opcion);
     }
+}
+
+function filtrarAuto(){
+    const resultado = autos.filter(filtrarMarca);
+    console.log(resultado);
+}
+
+function filtrarMarca( auto ) {
+    const { marca } = datosBusqueda;
+    if ( marca ) {
+        return auto.marca === marca;
+    }
+    return auto;
 }
